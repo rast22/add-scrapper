@@ -23,7 +23,7 @@ services:
       - postgres_db
     command: npm run start
     environment:
-        DATABASE_URL: postgres://postgres:password@host.docker.internal:5432/postgres
+        DATABASE_URL: postgres://postgres:password@postgres_db:5432/postgres
         DB_HOST: host.docker.internal
         NODE_ENV: development
         PORT: 5450

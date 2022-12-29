@@ -13,9 +13,10 @@ const Client = require('pg').Client
   async createDB () {
     this.client = new Client({
       user: 'postgres',
-      host: 'host.docker.internal',
+      // host: 'host.docker.internal',
+      host: 'localhost',
       database: 'postgres',
-      password: '4232',
+      password: 'postgres',
       port: 5432
     })
     await this.client.connect();
@@ -24,9 +25,9 @@ const Client = require('pg').Client
     await this.client.end();
     this.client = new Client({
       user: 'postgres',
-      host: 'host.docker.internal',
+      host: 'localhost',
       database: 'addsdatabase',
-      password: '4232',
+      password: 'postgres',
       port: 5432
     })
     await this.client.connect().then(async () => {
@@ -37,9 +38,9 @@ const Client = require('pg').Client
   async connectToDb () {
     this.client = new Client({
       user: 'postgres',
-      host: 'host.docker.internal',
+      host: 'localhost',
       database: 'addsdatabase',
-      password: '4232',
+      password: 'postgres',
       port: 5432
     })
     await this.client.connect();

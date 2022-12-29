@@ -34,9 +34,14 @@
 
 
 FROM node:16.13 as build
-WORKDIR /usr/src/app
-COPY package*.json ./
-ADD package*.json ./
+RUN mkdir -p /usr/node/app/node_modules && chown -R node:node /usr/node/app
+WORKDIR /usr/node/app
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
+COPY package.json package-lock.json ./
+#ADD package*.json ./
 RUN npm install
-COPY . .
+COPY --chown=node:node . .
+
 EXPOSE 5450
+CMD ["node", "index.js"]
