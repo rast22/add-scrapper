@@ -30,8 +30,7 @@ services:
     ports:
         - "5450:5450"
     volumes:
-      - /usr/bin/chromium
-      - ./add-scrapper-back:/usr/src/app
+      - ./:/usr/src/app
       - /usr/src/app/node_modules
 
   postgres_db:
