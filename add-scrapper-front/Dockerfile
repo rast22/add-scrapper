@@ -1,11 +1,12 @@
 FROM node:16.13 as build
-WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
-RUN npm install
+WORKDIR /dist/src/app
+RUN npm cache clean --force
 COPY . .
+RUN npm install
 RUN npm run build
 
+#COPY package.json package-lock.json ./
 
 FROM nginx:1.17.1-alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/add-scrapper /usr/share/nginx/html
+COPY --from=build /dist/src/app/dist/add-scrapper /usr/share/nginx/html
+COPY /nginx.conf  /etc/nginx/nginx.conf

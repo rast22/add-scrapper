@@ -13,6 +13,8 @@ app.use('/api' ,router);
 
 const start = async () => {
   try {
+    console.log('connecting to db1')
+
     await connection.createDB()
     await connection.connectToDb();
     await Parser.getAdds(connection)

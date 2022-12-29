@@ -8,7 +8,7 @@ export class AppService {
 
     apiBaseUrl: string;
     constructor(private http: HttpClient) {
-      this.apiBaseUrl = "http://localhost:5450";
+      this.apiBaseUrl = "http://127.0.01:5450";
     }
 
     getAdds() {

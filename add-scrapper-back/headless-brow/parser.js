@@ -5,10 +5,14 @@ const addController = require("../controllers/add-controller")
 class Parser {
   async getAdds(connection) {
     const fullList = [];
-    const browser = await puppeteer.launch({headless: true,args: ['--no-sandbox','--disable-setuid-sandbox']})
+    console.log('starting browser')
+    const browser = await puppeteer.launch({headless: true,args: ['--no-sandbox']})
+    console.log('browser started')
     const page = await browser.newPage()
+    console.log('new page created')
     for (let i = 1; i <= 3; i++) {
       await page.goto(`https://www.sreality.cz/en/search/for-sale/apartments?page=`+i,{waitUntil: ['networkidle0', 'domcontentloaded']})
+      console.log('page loaded')
       const data = await page.evaluate( () => {
         const rawAdds = document.querySelector(".dir-property-list").querySelectorAll(".property");
         const items = []
@@ -23,6 +27,7 @@ class Parser {
       fullList.push(...data)
     }
     await browser.close()
+    console.log(fullList)
     await addController.insertAdverts(fullList,connection)
   }
 }
