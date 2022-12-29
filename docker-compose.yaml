@@ -13,7 +13,9 @@ services:
         - ./add-scrapper-front:/dist/src/app
   back:
     #restart: on-failure
-    build: ./add-scrapper-back
+    build:
+      context: ./add-scrapper-back
+      dockerfile: Dockerfile
     depends_on:
       postgres_db:
         condition: service_healthy

@@ -35,7 +35,7 @@
 
 FROM node:16.13 as build
 WORKDIR /usr/src/app
-COPY COPY package*.json ./
+COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 5450
