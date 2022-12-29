@@ -35,7 +35,7 @@
 
 FROM node:16.13 as build
 WORKDIR /usr/src/app
-COPY package.json package-lock.json ./
+COPY COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 5450
