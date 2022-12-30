@@ -1,7 +1,0 @@
-CREATE ROLE addMaintainer WITH LOGIN PASSWORD 'admin';
---
--- CREATE DATABASE addsDatabase;
--- CREATE TABLE advert (
---     title VARCHAR(255),
---     image VARCHAR(255),
--- );

@@ -22,6 +22,7 @@ class AddService {
       for (let i = 0; i < advertList.length; i++) {
         await this.connection.insertAdvert(advertList[i])
       }
+      console.log('all adverts are inserted into database')
     }
     catch (e) {
       console.log(e)

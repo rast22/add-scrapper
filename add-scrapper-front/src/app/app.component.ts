@@ -30,7 +30,6 @@ export class AppComponent {
 
     handlePageEvent(event: any) {
       this.showenAdds = this.allAdds.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize);
-        console.log(event);
       }
 }
 

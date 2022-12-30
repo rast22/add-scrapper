@@ -5,8 +5,6 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-#COPY package.json package-lock.json ./
-
 FROM nginx:1.17.1-alpine
 COPY --from=build /dist/src/app/dist/add-scrapper /usr/share/nginx/html
 COPY /nginx.conf  /etc/nginx/nginx.conf

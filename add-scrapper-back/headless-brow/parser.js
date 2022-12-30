@@ -5,14 +5,15 @@ const addController = require("../controllers/add-controller")
 class Parser {
   async getAdds(connection) {
     const fullList = [];
+    const addAmount = 500
+    let pageCounter = 1;
     console.log('starting browser')
     const browser = await puppeteer.launch({headless: true,args: ['--no-sandbox'],ignoreDefaultArgs: ['--disable-extensions']})
     console.log('browser started')
     const page = await browser.newPage()
-    console.log('new page created')
-    for (let i = 1; i <= 3; i++) {
-      await page.goto(`https://www.sreality.cz/en/search/for-sale/apartments?page=`+i,{waitUntil: ['networkidle0', 'domcontentloaded']})
-      console.log('page loaded')
+    while (fullList.length !== addAmount){
+      await page.goto(`https://www.sreality.cz/en/search/for-sale/apartments?page=`+pageCounter ,{waitUntil: ['networkidle0', 'domcontentloaded']})
+      console.log(`page #${pageCounter} loaded`)
       const data = await page.evaluate( () => {
         const rawAdds = document.querySelector(".dir-property-list").querySelectorAll(".property");
         const items = []
@@ -25,9 +26,10 @@ class Parser {
         return items;
       })
       fullList.push(...data)
+      console.log(`took ${fullList.length} of ${addAmount} adverts`)
+      pageCounter++
     }
     await browser.close()
-    console.log(fullList)
     await addController.insertAdverts(fullList,connection)
   }
 }
