@@ -6,7 +6,7 @@ class Parser {
   async getAdds(connection) {
     const fullList = [];
     console.log('starting browser')
-    const browser = await puppeteer.launch({headless: true,args: ['--no-sandbox']})
+    const browser = await puppeteer.launch({headless: true,args: ['--no-sandbox'],ignoreDefaultArgs: ['--disable-extensions']})
     console.log('browser started')
     const page = await browser.newPage()
     console.log('new page created')
