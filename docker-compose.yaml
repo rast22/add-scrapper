@@ -5,6 +5,7 @@ services:
       ports:
       - "8080:80"
       volumes:
+        -
         - ./add-scrapper-front:/dist/src/app
   back:
     #restart: on-failure

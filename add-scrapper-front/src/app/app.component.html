@@ -1,0 +1,23 @@
+<!-- create a header-->
+<mat-toolbar color="primary">
+  <span>Add scraper</span>
+</mat-toolbar>
+<div class="add-container">
+    <mat-card *ngFor="let add of showenAdds, index as i" >
+      <a>
+        <img src="{{add.image}}" alt="Add picture">
+      </a>
+      <mat-card-content>
+        <p>{{add.title}}</p>
+      </mat-card-content>
+    </mat-card>
+</div>
+<div class="paginator">
+  <mat-paginator
+    (page)="handlePageEvent($event)"
+    [length]=allAdds.length
+    [pageSize]="15"
+    [hidePageSize]="true"
+    aria-label="Select page">
+  </mat-paginator>
+</div>
