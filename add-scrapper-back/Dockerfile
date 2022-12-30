@@ -33,15 +33,31 @@
 #EXPOSE 5450
 
 
-FROM node:16.13 as build
-RUN mkdir -p /usr/node/app/node_modules && chown -R node:node /usr/node/app
-WORKDIR /usr/node/app
+#FROM node:16.13 as build
+#RUN mkdir -p /usr/src/app
+#COPY package.json /usr/src/app/
+#COPY package-lock.json /usr/src/app/
+#WORKDIR /usr/src/app
+#ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+#
+##ADD package.json package-lock.json ./
+##ADD package*.json ./
+#RUN npm install
+#COPY . /usr/src/app
+#EXPOSE 5450
+#CMD ["node", "index.js"]
+
+FROM node:16
+
+
+WORKDIR /usr/src/app
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
-ADD package.json package-lock.json ./
-#ADD package*.json ./
-RUN npm install
-COPY --chown=node:node . .
+COPY package*.json ./
 
-EXPOSE 5450
-CMD ["node", "index.js"]
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+CMD [ "node", "index.js" ]

@@ -2,11 +2,6 @@ version: '1'
 services:
   front:
       build: ./add-scrapper-front
-      depends_on:
-        postgres_db:
-          condition: service_healthy
-      links:
-        - postgres_db
       ports:
       - "8080:80"
       volumes:
@@ -30,6 +25,7 @@ services:
     ports:
         - "5450:5450"
     volumes:
+      - ./add-scrapper-back:/usr/src/app
       - ./:/usr/src/app
       - /usr/src/app/node_modules
 
